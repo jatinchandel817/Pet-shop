@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Product Details')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-md-6"><img th:src="${product.imageUrl}" th:alt="${product.name}" class="img-fluid rounded shadow-sm"></div>
+        <div class="col-md-6">
+            <span class="badge text-bg-primary mb-2" th:text="${product.category}">Category</span>
+            <h1 th:text="${product.name}">Product</h1>
+            <p class="lead" th:text="${product.description}">Description</p>
+            <h2>₹<span th:text="${product.price}">0</span></h2>
+            <p th:text="'Available stock: ' + ${product.stockQuantity}"></p>
+            <form action="/cart/add" method="post" class="row g-2">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <div class="col-auto"><input type="number" name="quantity" value="1" min="1" th:max="${product.stockQuantity}" class="form-control"></div>
+                <div class="col-auto"><button class="btn btn-primary">Add to Cart</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

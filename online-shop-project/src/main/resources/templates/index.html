@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Home')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<section class="hero">
+    <div class="container text-center">
+        <span class="badge text-bg-primary mb-3">Simple Spring Boot Store</span>
+        <h1 class="display-4 fw-bold">Welcome to Online Shop</h1>
+        <p class="lead">Shop electronics, fashion, accessories and more.</p>
+        <a href="/products" class="btn btn-primary btn-lg">Start Shopping</a>
+    </div>
+</section>
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4"><div class="feature-card"><h3>Quality Products</h3><p>Browse useful everyday products.</p></div></div>
+        <div class="col-md-4"><div class="feature-card"><h3>Simple Cart</h3><p>Add, update and remove products easily.</p></div></div>
+        <div class="col-md-4"><div class="feature-card"><h3>Easy Checkout</h3><p>Place your order in a few simple steps.</p></div></div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

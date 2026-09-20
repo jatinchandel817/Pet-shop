@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Checkout')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<div class="container py-5">
+    <h1>Checkout</h1>
+    <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <form action="/checkout" method="post" th:object="${checkoutRequest}" class="card p-4 shadow-sm">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">Name</label><input class="form-control" th:field="*{name}" required></div>
+                    <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" th:field="*{email}" required></div>
+                    <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" th:field="*{phone}" required></div>
+                    <div class="col-md-6"><label class="form-label">Pincode</label><input class="form-control" th:field="*{pincode}" required></div>
+                    <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" th:field="*{address}" rows="3" required></textarea></div>
+                    <div class="col-md-4"><label class="form-label">City</label><input class="form-control" th:field="*{city}" required></div>
+                    <div class="col-md-4"><label class="form-label">State</label><input class="form-control" th:field="*{state}" required></div>
+                    <div class="col-12"><button class="btn btn-success btn-lg">Place Order</button></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4"><div class="card p-4"><h4>Order Total</h4><h2>₹<span th:text="${total}">0</span></h2></div></div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

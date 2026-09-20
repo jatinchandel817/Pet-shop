@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Orders')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<div class="container py-5">
+    <h1 class="mb-4">Orders</h1>
+    <div class="alert alert-info" th:if="${orders.isEmpty()}">No orders yet.</div>
+    <div class="card mb-3" th:each="order : ${orders}">
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <div><strong>Order #<span th:text="${order.id}">1</span></strong><div class="text-muted" th:text="${#temporals.format(order.orderDate, 'dd MMM yyyy HH:mm')}">Date</div></div>
+                <span class="badge text-bg-primary align-self-start" th:text="${order.status}">PLACED</span>
+            </div>
+            <hr>
+            <ul>
+                <li th:each="item : ${order.items}" th:text="${item.product.name + ' × ' + item.quantity + ' — ₹' + item.price}">Item</li>
+            </ul>
+            <strong>Total: ₹<span th:text="${order.totalAmount}">0</span></strong>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

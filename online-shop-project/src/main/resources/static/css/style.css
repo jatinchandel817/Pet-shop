@@ -1,0 +1,8 @@
+body { background: #f8f9fa; }
+.hero { padding: 110px 20px; background: linear-gradient(135deg, #eaf2ff, #f8f9fa); }
+.feature-card { background: white; border-radius: 16px; padding: 28px; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,.06); }
+.product-card { border: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,.06); transition: transform .2s; }
+.product-card:hover { transform: translateY(-4px); }
+.product-card img { height: 220px; object-fit: cover; }
+.quantity-input { max-width: 90px; }
+.success-box { background: white; padding: 60px 25px; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,.08); }

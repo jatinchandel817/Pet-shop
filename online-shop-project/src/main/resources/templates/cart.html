@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Cart')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<div class="container py-5">
+    <h1 class="mb-4">Shopping Cart</h1>
+    <div th:if="${items.isEmpty()}" class="alert alert-info">Your cart is empty. <a href="/products">Continue shopping</a>.</div>
+    <div th:unless="${items.isEmpty()}">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="item : ${items}">
+                    <td><a th:href="@{/products/{id}(id=${item.product.id})}" th:text="${item.product.name}">Product</a></td>
+                    <td>₹<span th:text="${item.product.price}">0</span></td>
+                    <td>
+                        <form action="/cart/update" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="id" th:value="${item.id}">
+                            <input class="form-control quantity-input" type="number" name="quantity" min="1" th:max="${item.product.stockQuantity}" th:value="${item.quantity}">
+                            <button class="btn btn-sm btn-outline-primary">Update</button>
+                        </form>
+                    </td>
+                    <td>₹<span th:text="${item.product.price.multiply(T(java.math.BigDecimal).valueOf(item.quantity))}">0</span></td>
+                    <td><form th:action="@{/cart/remove/{id}(id=${item.id})}" method="post"><button class="btn btn-sm btn-outline-danger">Remove</button></form></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <form action="/cart/clear" method="post"><button class="btn btn-outline-danger">Clear Cart</button></form>
+            <div class="text-end"><h3>Total: ₹<span th:text="${total}">0</span></h3><a href="/checkout" class="btn btn-success">Checkout</a></div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
